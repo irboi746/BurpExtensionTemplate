@@ -10,11 +10,14 @@ import javax.swing.JToggleButton;
 
 import burp.api.montoya.MontoyaApi;
 import burp.api.montoya.logging.Logging;
+import javax.swing.JSplitPane;
+import javax.swing.JTextField;
 
 
 public class worldTabPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	private JTextField txtDummyText;
 
 
 	public worldTabPanel(MontoyaApi api) {
@@ -24,24 +27,46 @@ public class worldTabPanel extends JPanel {
 		lblHello.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblHello, BorderLayout.NORTH);
 		
-		JLabel lblEnabledisableHello = new JLabel("Enable/Disable World");
-		add(lblEnabledisableHello, BorderLayout.WEST);
+		JSplitPane splitPane = new JSplitPane();
+		splitPane.setResizeWeight(0.5);
+		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
+		add(splitPane, BorderLayout.WEST);
 		
-		JToggleButton tglbtnEnable = new JToggleButton("Disabled");
-		tglbtnEnable.addActionListener(new ActionListener() {
+		JLabel lblEnabledisableWorld = new JLabel("Enable/Disable World");
+		splitPane.setLeftComponent(lblEnabledisableWorld);
+		
+		JLabel lblDummy = new JLabel("dummy");
+		lblDummy.setHorizontalAlignment(SwingConstants.CENTER);
+		splitPane.setRightComponent(lblDummy);
+		
+		JSplitPane splitPane_1 = new JSplitPane();
+		splitPane_1.setResizeWeight(0.5);
+		splitPane_1.setOrientation(JSplitPane.VERTICAL_SPLIT);
+		add(splitPane_1, BorderLayout.CENTER);
+		
+		JToggleButton tglbtnDisabled = new JToggleButton("Disabled");
+		splitPane_1.setLeftComponent(tglbtnDisabled);
+		
+		txtDummyText = new JTextField();
+		txtDummyText.setEditable(false);
+		txtDummyText.setEnabled(false);
+		txtDummyText.setText("dummy text");
+		splitPane_1.setRightComponent(txtDummyText);
+		txtDummyText.setColumns(10);
+		tglbtnDisabled.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Logging logging = api.logging();
-				if(tglbtnEnable.isSelected()) {
-					tglbtnEnable.setText("Enabled");
+				if(tglbtnDisabled.isSelected()) {
+					tglbtnDisabled.setText("Enabled");
 					logging.logToOutput("World Enabled");
 				}
 				else {
 					logging.logToOutput("World Disabled");
-					tglbtnEnable.setText("Disabled");
+					tglbtnDisabled.setText("Disabled");
 				}
 			}
 		});
-		add(tglbtnEnable, BorderLayout.CENTER);
+		
 
 	}
 

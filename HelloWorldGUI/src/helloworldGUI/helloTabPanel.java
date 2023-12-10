@@ -10,6 +10,8 @@ import javax.swing.JToggleButton;
 
 import burp.api.montoya.MontoyaApi;
 import burp.api.montoya.logging.Logging;
+import javax.swing.JSplitPane;
+import javax.swing.JTextArea;
 
 
 public class helloTabPanel extends JPanel {
@@ -23,24 +25,46 @@ public class helloTabPanel extends JPanel {
 		lblHello.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblHello, BorderLayout.NORTH);
 		
-		JLabel lblEnabledisableHello = new JLabel("Enable/Disable Hello");
-		add(lblEnabledisableHello, BorderLayout.WEST);
+		JSplitPane splitPane_west = new JSplitPane();
+		splitPane_west.setResizeWeight(0.5);
+		splitPane_west.setOrientation(JSplitPane.VERTICAL_SPLIT);
+		add(splitPane_west, BorderLayout.WEST);
 		
-		JToggleButton tglbtnEnable = new JToggleButton("Disabled");
-		tglbtnEnable.addActionListener(new ActionListener() {
+		JLabel lblEnabledisableHello = new JLabel("Enable/Disable Hello");
+		splitPane_west.setLeftComponent(lblEnabledisableHello);
+		
+		JLabel lblDummy = new JLabel("dummy");
+		lblDummy.setHorizontalAlignment(SwingConstants.CENTER);
+		splitPane_west.setRightComponent(lblDummy);
+		
+		JSplitPane splitPane_center = new JSplitPane();
+		splitPane_center.setResizeWeight(0.5);
+		splitPane_center.setOrientation(JSplitPane.VERTICAL_SPLIT);
+		add(splitPane_center, BorderLayout.CENTER);
+		
+		JToggleButton tglbtnDisabled = new JToggleButton("Disabled");
+		splitPane_center.setLeftComponent(tglbtnDisabled);
+		
+		JTextArea txtrDummyTextArea = new JTextArea();
+		txtrDummyTextArea.setEditable(false);
+		txtrDummyTextArea.setEnabled(false);
+		txtrDummyTextArea.setWrapStyleWord(true);
+		txtrDummyTextArea.setTabSize(6);
+		txtrDummyTextArea.setText("dummy text area");
+		splitPane_center.setRightComponent(txtrDummyTextArea);
+		tglbtnDisabled.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Logging logging = api.logging();
-				if(tglbtnEnable.isSelected()) {
-					tglbtnEnable.setText("Enabled");
+				if(tglbtnDisabled.isSelected()) {
+					tglbtnDisabled.setText("Enabled");
 					logging.logToOutput("Hello Enabled");
 				}
 				else {
 					logging.logToOutput("Hello Disabled");
-					tglbtnEnable.setText("Disabled");
+					tglbtnDisabled.setText("Disabled");
 				}
 			}
 		});
-		add(tglbtnEnable, BorderLayout.CENTER);
 
 	}
 
