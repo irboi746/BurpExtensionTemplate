@@ -6,8 +6,8 @@ This extension is split into multiple files to demonstrate `registerSuiteTab` as
 ![HelloTabDisabled](/HelloWorldGUI/images/HelloTabDisabled.jpg)
 
 
-![HelloTabEnabled](/images/HelloTabEnabled.jpg)
+![HelloTabEnabled](/HelloWorldGUI/images/HelloTabEnabled.jpg)
 
 
-![ExtensionOutput](/images/ExtensionOutput.jpg)
+![ExtensionOutput](/HelloWorldGUI/images/ExtensionOutput.jpg)
 
